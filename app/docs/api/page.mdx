@@ -1,0 +1,393 @@
+import { components } from '@/components/mdx-components';
+export { components };
+import {Alert} from '@/components/ui/alert'
+import {Badge} from '@/components/ui/badge'
+import {Button} from '@/components/ui/button'
+import {Card} from '@/components/ui/card'
+
+# API Reference
+
+Complete API reference for Documentation Hub. This section covers all available methods, components, and configuration options.
+
+## Core API
+
+### DocumentationHub Class
+
+The main class for initializing and configuring your documentation site.
+
+```typescript
+import { DocumentationHub } from '@/lib/docs';
+
+const hub = new DocumentationHub(options);
+```
+
+#### Constructor Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `theme` | `'light' \| 'dark' \| 'auto'` | `'auto'` | Default theme mode |
+| `search` | `boolean \| SearchConfig` | `true` | Enable search functionality |
+| `navigation` | `NavigationConfig` | `{}` | Navigation configuration |
+| `seo` | `SEOConfig` | `{}` | SEO settings |
+
+#### Methods
+
+**`initialize()`**
+```typescript
+hub.initialize(): Promise<void>
+```
+Initializes the documentation hub with the provided configuration.
+
+**`setTheme(theme)`**
+```typescript
+hub.setTheme(theme: 'light' | 'dark' | 'auto'): void
+```
+Changes the current theme.
+
+**`search(query)`**
+```typescript
+hub.search(query: string): Promise<SearchResult[]>
+```
+Performs a search across all documentation content.
+
+## Component API
+
+### Card Component
+
+A flexible container component for organizing content.
+
+```tsx
+<Card title="Card Title" description="Optional description">
+  Content goes here
+</Card>
+```
+
+#### Props
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| `title` | `string` | No | Card title |
+| `description` | `string` | No | Card description |
+| `children` | `ReactNode` | No | Card content |
+| `className` | `string` | No | Additional CSS classes |
+
+#### Examples
+
+<Card title="Basic Card">
+  This is a basic card with just a title.
+</Card>
+
+<Card title="Card with Description" description="This card includes both title and description">
+  And here's the main content area.
+</Card>
+
+### Alert Component
+
+Display important messages and notifications.
+
+```tsx
+<Alert type="info">Alert message</Alert>
+```
+
+#### Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `type` | `'info' \| 'warning' \| 'success'` | No | `'info'` | Alert type |
+| `children` | `ReactNode` | Yes | - | Alert content |
+| `className` | `string` | No | - | Additional CSS classes |
+
+#### Examples
+
+<Alert type="info">
+  This is an informational alert.
+</Alert>
+
+<Alert type="warning">
+  This is a warning alert.
+</Alert>
+
+<Alert type="success">
+  This is a success alert.
+</Alert>
+
+### Badge Component
+
+Small labels for categorization and status indication.
+
+```tsx
+<Badge variant="default">Badge Text</Badge>
+```
+
+#### Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `variant` | `'default' \| 'secondary' \| 'outline' \| 'destructive'` | No | `'default'` | Badge style variant |
+| `children` | `ReactNode` | Yes | - | Badge content |
+| `className` | `string` | No | - | Additional CSS classes |
+
+#### Examples
+
+<div className="flex gap-2 my-4">
+  <Badge>Default</Badge>
+  <Badge variant="secondary">Secondary</Badge>
+  <Badge variant="outline">Outline</Badge>
+  <Badge variant="destructive">Destructive</Badge>
+</div>
+
+### Button Component
+
+Interactive button elements for actions and navigation.
+
+```tsx
+<Button variant="default" size="medium">
+  Click me
+</Button>
+```
+
+#### Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `variant` | `'default' \| 'secondary' \| 'outline' \| 'ghost' \| 'destructive'` | No | `'default'` | Button style variant |
+| `size` | `'sm' \| 'md' \| 'lg'` | No | `'md'` | Button size |
+| `children` | `ReactNode` | Yes | - | Button content |
+| `onClick` | `() => void` | No | - | Click handler |
+| `disabled` | `boolean` | No | `false` | Disabled state |
+| `className` | `string` | No | - | Additional CSS classes |
+
+#### Examples
+
+<div className="flex gap-2 my-4">
+  <Button>Default</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="outline">Outline</Button>
+  <Button variant="ghost">Ghost</Button>
+</div>
+
+## Configuration API
+
+### Navigation Configuration
+
+Configure the sidebar navigation structure.
+
+```typescript
+interface NavigationConfig {
+  sections: NavigationSection[];
+}
+
+interface NavigationSection {
+  title: string;
+  items: NavigationItem[];
+}
+
+interface NavigationItem {
+  title: string;
+  href: string;
+  icon?: string;
+}
+```
+
+#### Example
+
+```javascript
+const navigationConfig = {
+  sections: [
+    {
+      title: 'Getting Started',
+      items: [
+        { title: 'Introduction', href: '/docs' },
+        { title: 'Installation', href: '/docs/installation' },
+        { title: 'Quick Start', href: '/docs/quick-start' }
+      ]
+    },
+    {
+      title: 'Components',
+      items: [
+        { title: 'Overview', href: '/docs/components' },
+        { title: 'Button', href: '/docs/components/button' },
+        { title: 'Card', href: '/docs/components/card' }
+      ]
+    }
+  ]
+};
+```
+
+### Search Configuration
+
+Configure the search functionality.
+
+```typescript
+interface SearchConfig {
+  provider: 'local' | 'algolia';
+  options?: {
+    threshold?: number;
+    keys?: string[];
+    maxResults?: number;
+  };
+}
+```
+
+#### Local Search Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `threshold` | `number` | `0.3` | Fuzzy search threshold (0-1) |
+| `keys` | `string[]` | `['title', 'content']` | Fields to search |
+| `maxResults` | `number` | `10` | Maximum search results |
+
+#### Example
+
+```javascript
+const searchConfig = {
+  provider: 'local',
+  options: {
+    threshold: 0.2,
+    keys: ['title', 'content', 'tags'],
+    maxResults: 15
+  }
+};
+```
+
+### SEO Configuration
+
+Configure SEO settings for your documentation.
+
+```typescript
+interface SEOConfig {
+  title?: string;
+  description?: string;
+  keywords?: string[];
+  openGraph?: {
+    title?: string;
+    description?: string;
+    image?: string;
+  };
+}
+```
+
+#### Example
+
+```javascript
+const seoConfig = {
+  title: 'My Documentation',
+  description: 'Comprehensive documentation for my project',
+  keywords: ['documentation', 'api', 'guide'],
+  openGraph: {
+    title: 'My Documentation Hub',
+    description: 'Everything you need to know',
+    image: '/og-image.png'
+  }
+};
+```
+
+## Utility Functions
+
+### Theme Utilities
+
+```typescript
+import { getTheme, setTheme, toggleTheme } from '@/lib/theme';
+
+// Get current theme
+const currentTheme = getTheme();
+
+// Set theme
+setTheme('dark');
+
+// Toggle between light and dark
+toggleTheme();
+```
+
+### Search Utilities
+
+```typescript
+import { searchContent, indexContent } from '@/lib/search';
+
+// Search through content
+const results = await searchContent('query');
+
+// Re-index content (useful after updates)
+await indexContent();
+```
+
+## HTTP Status Codes
+
+When working with the API, you may encounter these status codes:
+
+| Code | Status | Description |
+|------|--------|-------------|
+| 200 | OK | Request successful |
+| 404 | Not Found | Resource not found |
+| 500 | Internal Server Error | Server error |
+
+## Error Handling
+
+```typescript
+try {
+  const results = await hub.search('query');
+} catch (error) {
+  if (error instanceof SearchError) {
+    console.error('Search failed:', error.message);
+  } else {
+    console.error('Unexpected error:', error);
+  }
+}
+```
+
+## Rate Limits
+
+| Endpoint | Rate Limit | Window |
+|----------|------------|--------|
+| Search API | 100 requests | 1 minute |
+| Content API | 1000 requests | 1 hour |
+
+<Alert type="info">
+  Rate limits are applied per IP address. Contact support if you need higher limits.
+</Alert>
+
+## Migration Guide
+
+### From v1.x to v2.x
+
+Breaking changes in v2.0:
+
+1. **Configuration format changed**
+   ```typescript
+   // Old (v1.x)
+   const config = { theme: { mode: 'dark' } };
+   
+   // New (v2.x)
+   const config = { theme: 'dark' };
+   ```
+
+2. **Component props renamed**
+   ```tsx
+   <!-- Old -->
+   <Alert status="info">Message</Alert>
+   
+   <!-- New -->
+   <Alert type="info">Message</Alert>
+   ```
+
+3. **Search API updated**
+   ```typescript
+   // Old
+   hub.performSearch(query);
+   
+   // New
+   hub.search(query);
+   ```
+
+## Need Help?
+
+<Alert type="success">
+  Check out our [examples section](/docs/examples) for practical implementations of these APIs.
+</Alert>
+
+For more detailed information:
+
+- **[Component Examples](/docs/components)** - See components in action
+- **[Integration Examples](/docs/examples)** - Real-world usage patterns
+- **[GitHub Issues](https://github.com)** - Report bugs or request features
+- **[Community Discord](#)** - Get help from the community

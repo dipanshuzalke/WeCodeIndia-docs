@@ -1,0 +1,206 @@
+import { components } from '@/components/mdx-components';
+export { components };
+import {Alert} from '@/components/ui/alert'
+import {Card} from '@/components/ui/card'
+import {Badge} from '@/components/ui/badge'
+
+# Quick Start
+
+Get up and running with Documentation Hub in just a few minutes. This guide will walk you through creating your first documentation page.
+
+<Alert type="info">
+  Make sure you've completed the [installation](/docs/installation) before following this guide.
+</Alert>
+
+## Create Your First Page
+
+### Step 1: Create a New MDX File
+
+Create a new file at `app/docs/my-first-page/page.mdx`:
+
+```mdx
+import { components } from '@/components/mdx-components';
+export { components };
+
+# My First Page
+
+This is my first documentation page!
+
+## Features
+
+- Easy to write in Markdown
+- Supports React components
+- Beautiful syntax highlighting
+
+```javascript
+console.log('Hello, Documentation Hub!');
+```
+
+<Alert type="success">
+  Your first page is ready!
+</Alert>
+```
+
+### Step 2: Add Navigation
+
+Update the navigation in `components/sidebar.tsx` to include your new page:
+
+```typescript
+const navigation = [
+  {
+    title: 'Getting Started',
+    items: [
+      { title: 'Introduction', href: '/docs' },
+      { title: 'Installation', href: '/docs/installation' },
+      { title: 'Quick Start', href: '/docs/quick-start' },
+      { title: 'My First Page', href: '/docs/my-first-page' }, // Add this line
+    ],
+  },
+  // ... rest of navigation
+];
+```
+
+### Step 3: View Your Page
+
+Start the development server and navigate to your new page:
+
+```bash
+npm run dev
+```
+
+Visit `http://localhost:3000/docs/my-first-page` to see your page in action!
+
+## Using Components
+
+Documentation Hub comes with built-in components you can use in your MDX files:
+
+### Alerts
+
+<Alert type="info">
+  This is an info alert.
+</Alert>
+
+<Alert type="warning">
+  This is a warning alert.
+</Alert>
+
+<Alert type="success">
+  This is a success alert.
+</Alert>
+
+```mdx
+<Alert type="info">
+  This is an info alert.
+</Alert>
+```
+
+### Cards
+
+<Card title="Example Card" description="This is a card component">
+  You can put any content inside a card, including code examples, lists, and other components.
+</Card>
+
+```mdx
+<Card title="Example Card" description="This is a card component">
+  You can put any content inside a card.
+</Card>
+```
+
+### Badges
+
+Here are some badges: <Badge>Default</Badge> <Badge variant="secondary">Secondary</Badge> <Badge variant="outline">Outline</Badge>
+
+```mdx
+<Badge>Default</Badge>
+<Badge variant="secondary">Secondary</Badge>
+<Badge variant="outline">Outline</Badge>
+```
+
+## Code Highlighting
+
+Documentation Hub automatically highlights code blocks:
+
+### JavaScript
+
+```javascript
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+const message = greet('Documentation Hub');
+console.log(message);
+```
+
+### Python
+
+```python
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+# Generate Fibonacci sequence
+for i in range(10):
+    print(fibonacci(i))
+```
+
+### CSS
+
+```css
+.documentation-hub {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px;
+  padding: 2rem;
+  color: white;
+}
+
+.documentation-hub:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+```
+
+## Frontmatter
+
+You can add metadata to your pages using frontmatter:
+
+```mdx
+---
+title: My Custom Title
+description: A custom description for SEO
+author: John Doe
+date: 2024-01-15
+tags: [guide, tutorial, beginner]
+---
+
+# Page Content
+
+Your page content goes here...
+```
+
+## Custom Styling
+
+You can add custom CSS classes to your components:
+
+```mdx
+<div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-lg">
+  This is a custom styled div with Tailwind CSS classes.
+</div>
+```
+
+<div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-lg my-6">
+  This is a custom styled div with Tailwind CSS classes.
+</div>
+
+## What's Next?
+
+Now that you've created your first page, explore more features:
+
+1. **[Components](/docs/components)** - Learn about all available components
+2. **[API Reference](/docs/api)** - Explore the complete API documentation
+3. **[Examples](/docs/examples)** - See real-world implementation examples
+4. **[Customization](/docs/customization)** - Customize the look and feel
+
+<Alert type="success">
+  You're now ready to create amazing documentation! Happy writing! 🎉
+</Alert>

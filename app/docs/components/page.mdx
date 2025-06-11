@@ -1,0 +1,260 @@
+import { components } from "@/components/mdx-components";
+export { components };
+import { Alert } from "@/components/ui/alert";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+
+# Components Overview
+
+Documentation Hub comes with a comprehensive set of pre-built components that you can use in your MDX files to create rich, interactive documentation.
+
+## Available Components
+
+### Layout Components
+
+These components help structure your content:
+
+- **Card** - Container for grouping related content
+- **Alert** - Highlight important information
+- **Badge** - Label and categorize content
+- **Button** - Interactive elements
+
+### Typography Components
+
+All standard HTML elements are styled and enhanced:
+
+- Headings (h1-h6)
+- Paragraphs
+- Lists (ordered and unordered)
+- Blockquotes
+- Code blocks and inline code
+
+## Component Examples
+
+### Cards
+
+Cards are perfect for organizing content into digestible sections:
+
+<Card title="Basic Card" description="A simple card with title and description">
+  This is the content area where you can include any MDX content, including
+  other components, code blocks, and formatted text.
+</Card>
+
+<Card title="Advanced Features">
+  Cards can contain complex content: - Lists and bullet points - Code examples -
+  Other nested components - **Bold** and *italic* text
+</Card>
+
+```mdx
+<Card title="Basic Card" description="A simple card with title and description">
+  Your content goes here...
+</Card>
+```
+
+### Alerts
+
+Use alerts to draw attention to important information:
+
+<Alert type="info">
+  **Info Alert**: Use this for general information and helpful tips.
+</Alert>
+
+<Alert type="warning">
+  **Warning Alert**: Use this to highlight potential issues or important
+  considerations.
+</Alert>
+
+<Alert type="success">
+  **Success Alert**: Use this to confirm successful actions or highlight
+  positive outcomes.
+</Alert>
+
+```mdx
+<Alert type="info">Your informational message here.</Alert>
+
+<Alert type="warning">Your warning message here.</Alert>
+
+<Alert type="success">Your success message here.</Alert>
+```
+
+### Badges
+
+Badges are great for labeling and categorization:
+
+<div className="flex gap-2 my-4">
+  <Badge>Default</Badge>
+  <Badge variant="secondary">Secondary</Badge>
+  <Badge variant="outline">Outline</Badge>
+  <Badge variant="destructive">Error</Badge>
+</div>
+
+```mdx
+<Badge>Default</Badge>
+<Badge variant="secondary">Secondary</Badge>
+<Badge variant="outline">Outline</Badge>
+<Badge variant="destructive">Error</Badge>
+```
+
+### Buttons
+
+Interactive buttons for calls-to-action:
+
+<div className="flex gap-2 my-4">
+  <Button>Primary Button</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="outline">Outline</Button>
+  <Button variant="ghost">Ghost</Button>
+</div>
+
+```mdx
+<Button>Primary Button</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+```
+
+## Code Blocks
+
+Syntax highlighting is built-in for many languages:
+
+### JavaScript/TypeScript
+
+```javascript
+// React component example
+import React, { useState } from "react";
+
+function Counter({ initialValue = 0 }) {
+  const [count, setCount] = useState(initialValue);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+
+export default Counter;
+```
+
+### CSS
+
+```css
+/* Modern CSS with custom properties */
+:root {
+  --primary-color: #3b82f6;
+  --secondary-color: #64748b;
+  --border-radius: 0.5rem;
+}
+
+.card {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+```
+
+### JSON
+
+```json
+{
+  "name": "documentation-hub",
+  "version": "1.0.0",
+  "description": "Modern documentation platform",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^13.5.0",
+    "react": "^18.2.0",
+    "tailwindcss": "^3.3.0"
+  }
+}
+```
+
+## Tables
+
+Create beautiful, responsive tables:
+
+| Component | Purpose              | Variants                                 |
+| --------- | -------------------- | ---------------------------------------- |
+| Card      | Content organization | Default                                  |
+| Alert     | Important messages   | info, warning, success                   |
+| Badge     | Labels and tags      | default, secondary, outline, destructive |
+| Button    | Interactive elements | default, secondary, outline, ghost       |
+
+## Lists
+
+### Unordered Lists
+
+- Getting started with components
+- Understanding the component system
+- Best practices for documentation
+  - Keep it concise
+  - Use appropriate components
+  - Include code examples
+
+### Ordered Lists
+
+1. **Plan your documentation structure**
+
+   - Identify your audience
+   - Outline key topics
+   - Organize content logically
+
+2. **Choose appropriate components**
+
+   - Use cards for grouped information
+   - Use alerts for important notices
+   - Use badges for categorization
+
+3. **Write clear, concise content**
+   - Use simple language
+   - Include practical examples
+   - Test your documentation
+
+## Blockquotes
+
+> "Good documentation is like a love letter that you write to your future self."
+>
+> — Damian Conway
+
+## Combining Components
+
+You can combine multiple components to create rich, informative sections:
+
+<Card title="🚀 Pro Tip" description="Advanced component usage">
+  <Alert type="info">
+    You can nest components inside each other for complex layouts. For example,
+    this alert is inside a card!
+  </Alert>
+  Here's a quick checklist for effective documentation: - ✅ Use clear, descriptive
+  headings - ✅ Include practical code examples - ✅ Add visual elements with components
+  - ✅ Keep content up-to-date
+  <div className="flex gap-2 mt-4">
+    <Badge>Documentation</Badge>
+    <Badge variant="secondary">Best Practices</Badge>
+    <Badge variant="outline">Tips</Badge>
+  </div>
+</Card>
+
+## Next Steps
+
+Now that you understand the available components:
+
+1. **[API Reference](/docs/api)** - Learn about component props and customization
+2. **[Examples](/docs/examples)** - See real-world usage examples
+3. **[Customization](/docs/customization)** - Create your own custom components
+
+<Alert type="success">
+  You're ready to create beautiful, interactive documentation with components!
+</Alert>

@@ -1,0 +1,75 @@
+import { components } from '@/components/mdx-components';
+export { components };
+import {Alert} from '@/components/ui/alert'
+import {Card} from '@/components/ui/card'
+
+# Introduction
+
+Welcome to our comprehensive documentation hub! This guide will help you get started with our platform and make the most of its powerful features.
+
+<Alert type="success">
+  You're viewing the main documentation page. Use the sidebar to navigate between different sections.
+</Alert>
+
+## What is Documentation Hub?
+
+Documentation Hub is a modern, developer-friendly platform designed to make creating and maintaining documentation effortless. Whether you're building APIs, writing guides, or creating tutorials, our platform provides all the tools you need.
+
+### Key Features
+
+- **Modern Design**: Clean, responsive interface that works on all devices
+- **Powerful Search**: Find exactly what you need with intelligent search
+- **Dark Mode**: Easy on the eyes with automatic theme switching
+- **MDX Support**: Write content in Markdown with React components
+- **Syntax Highlighting**: Beautiful code blocks with language support
+
+## Quick Navigation
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+  <Card title="Getting Started" description="Set up your first project">
+    Learn the basics and get up and running in minutes.
+  </Card>
+  
+  <Card title="Components" description="UI building blocks">
+    Explore our comprehensive component library.
+  </Card>
+  
+  <Card title="API Reference" description="Complete API documentation">
+    Detailed reference for all API endpoints and methods.
+  </Card>
+  
+  <Card title="Examples" description="Real-world implementations">
+    See how to implement common patterns and use cases.
+  </Card>
+</div>
+
+## Code Example
+
+Here's a simple example of how to get started:
+
+```javascript
+import { DocumentationHub } from '@/lib/docs';
+
+const hub = new DocumentationHub({
+  theme: 'auto',
+  search: true,
+  syntax: 'highlight'
+});
+
+hub.initialize();
+```
+
+## Need Help?
+
+<Alert type="info">
+  If you need assistance, check out our examples section or reach out to our community on GitHub.
+</Alert>
+
+Ready to dive deeper? Use the navigation menu to explore specific topics, or try our search functionality to find exactly what you're looking for.
+
+## What's Next?
+
+1. **Installation**: Set up your development environment
+2. **Quick Start**: Build your first application
+3. **Components**: Learn about available UI components
+4. **API Reference**: Explore our complete API documentation
