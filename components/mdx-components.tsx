@@ -1,232 +1,150 @@
 "use client";
 
-import { ReactNode } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { AlertTriangle, Info, CheckCircle, Copy, Check } from 'lucide-react';
-import { useState } from 'react';
-import { cn } from '@/lib/utils';
+import { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
-// Enhanced code block component with copy functionality
-function CodeBlock({ children, className }: { children?: ReactNode; className?: string }) {
-  const [copied, setCopied] = useState(false);
-  
-  const handleCopy = () => {
-    const text = typeof children === 'string' ? children : '';
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+export const components = {
+  h1: ({ children }: { children?: ReactNode }) => {
+    const id = typeof children === "string" ? children.toLowerCase().replace(/\s+/g, "-") : "default-id";
+    return (
+      <h1
+        id={id}
+        className="text-2xl lg:text-3xl font-bold font-dm-sans text-app-typo-h1-dark dark:text-app-primary-light border-b border-b-app-border-dark py-3"
+      >
+        {children}
+      </h1>
+    );
+  },
 
-  return (
-    <div className="relative group">
-      <pre className={cn(
-        "relative overflow-x-auto rounded-xl bg-slate-950 dark:bg-slate-900 p-6 text-sm leading-relaxed",
-        "border border-slate-200 dark:border-slate-800",
-        "shadow-lg dark:shadow-slate-900/20",
-        className
-      )}>
-        <code className="text-slate-50 font-mono">{children}</code>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8 p-0 text-slate-400 hover:text-slate-200 hover:bg-slate-800"
-          onClick={handleCopy}
-        >
-          {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-        </Button>
-      </pre>
-    </div>
-  );
-}
+  h2: ({ children }: { children?: ReactNode }) => {
+    const id = typeof children === "string" ? children.toLowerCase().replace(/\s+/g, "-") : "default-id";
+    return (
+      <h2
+        id={id}
+        className="text-xl lg:text-[1.6rem] font-bold font-dm-sans text-app-typo-h1-dark dark:text-app-primary-light mt-7 md:mt-10"
+      >
+        {children}
+      </h2>
+    );
+  },
 
-const components = {
-  h1: ({ children }: { children?: ReactNode }) => (
-    <h1 className="scroll-m-20 text-5xl font-bold tracking-tight mb-8 pb-6 border-b border-border/40 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-      {children}
-    </h1>
-  ),
-  h2: ({ children }: { children?: ReactNode }) => (
-    <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight mb-6 mt-12 pb-3 border-b border-border/20 text-foreground">
-      {children}
-    </h2>
-  ),
-  h3: ({ children }: { children?: ReactNode }) => (
-    <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight mb-4 mt-10 text-foreground">
-      {children}
-    </h3>
-  ),
-  h4: ({ children }: { children?: ReactNode }) => (
-    <h4 className="scroll-m-20 text-xl font-semibold mb-3 mt-8 text-foreground">
-      {children}
-    </h4>
-  ),
-  h5: ({ children }: { children?: ReactNode }) => (
-    <h5 className="scroll-m-20 text-lg font-semibold mb-3 mt-6 text-foreground">
-      {children}
-    </h5>
-  ),
-  h6: ({ children }: { children?: ReactNode }) => (
-    <h6 className="scroll-m-20 text-base font-semibold mb-2 mt-4 text-foreground">
-      {children}
-    </h6>
-  ),
+  h3: ({ children }: { children?: ReactNode }) => {
+    const id = typeof children === "string" ? children.toLowerCase().replace(/\s+/g, "-") : "default-id";
+    return (
+      <h3
+        id={id}
+        className="text-lg lg:text-[1.4rem] font-semibold text-app-typo-h2-dark mt-5 md:mt-8"
+      >
+        {children}
+      </h3>
+    );
+  },
+
+  h4: ({ children }: { children?: ReactNode }) => {
+    const id = typeof children === "string" ? children.toLowerCase().replace(/\s+/g, "-") : "default-id";
+    return (
+      <h4
+        id={id}
+        className="text-base lg:text-[1.2rem] font-semibold text-app-typo-h2-dark py-1 mt-1 md:mt-4"
+      >
+        {children}
+      </h4>
+    );
+  },
+
   p: ({ children }: { children?: ReactNode }) => (
-    <p className="leading-7 mb-6 text-muted-foreground text-base">
+    <p className="text-sm lg:text-base text-app-typo-p-dark/80 py-1">
       {children}
     </p>
   ),
-  ul: ({ children }: { children?: ReactNode }) => (
-    <ul className="my-6 ml-6 list-none space-y-3">
-      {children}
-    </ul>
-  ),
-  ol: ({ children }: { children?: ReactNode }) => (
-    <ol className="my-6 ml-6 list-decimal space-y-3 marker:text-primary marker:font-semibold">
-      {children}
-    </ol>
-  ),
-  li: ({ children }: { children?: ReactNode }) => (
-    <li className="text-muted-foreground relative pl-6 before:content-['•'] before:absolute before:left-0 before:text-primary before:font-bold before:text-lg">
-      {children}
-    </li>
-  ),
-  blockquote: ({ children }: { children?: ReactNode }) => (
-    <blockquote className="border-l-4 border-primary/50 pl-6 py-4 my-6 bg-muted/30 rounded-r-lg italic text-muted-foreground relative">
-      <div className="absolute top-2 left-2 text-primary/20 text-4xl font-serif">"</div>
-      <div className="relative z-10">{children}</div>
-    </blockquote>
-  ),
-  code: ({ children }: { children?: ReactNode }) => (
-    <code className="relative rounded-md bg-muted px-2 py-1 font-mono text-sm font-medium text-foreground border border-border/50 shadow-sm">
-      {children}
-    </code>
-  ),
-  pre: ({ children }: { children?: ReactNode }) => (
-    <CodeBlock className="mb-6">
-      {children}
-    </CodeBlock>
-  ),
-  hr: () => (
-    <Separator className="my-8 bg-gradient-to-r from-transparent via-border to-transparent" />
-  ),
-  table: ({ children }: { children?: ReactNode }) => (
-    <div className="my-8 w-full overflow-hidden rounded-lg border border-border shadow-sm">
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
-          {children}
-        </table>
-      </div>
-    </div>
-  ),
-  thead: ({ children }: { children?: ReactNode }) => (
-    <thead className="bg-muted/50">
-      {children}
-    </thead>
-  ),
-  tbody: ({ children }: { children?: ReactNode }) => (
-    <tbody className="divide-y divide-border">
-      {children}
-    </tbody>
-  ),
-  tr: ({ children }: { children?: ReactNode }) => (
-    <tr className="hover:bg-muted/30 transition-colors">
-      {children}
-    </tr>
-  ),
-  th: ({ children }: { children?: ReactNode }) => (
-    <th className="px-6 py-4 text-left font-semibold text-foreground border-b border-border">
-      {children}
-    </th>
-  ),
-  td: ({ children }: { children?: ReactNode }) => (
-    <td className="px-6 py-4 text-muted-foreground">
-      {children}
-    </td>
-  ),
+
   a: ({ children, href }: { children?: ReactNode; href?: string }) => (
-    <a 
+    <a
       href={href}
-      className="text-primary hover:text-primary/80 transition-colors underline underline-offset-4 decoration-primary/30 hover:decoration-primary/60 font-medium"
+      className="text-blue-300 transition-colors underline py-1"
     >
       {children}
     </a>
   ),
+
+  span: ({ children }: { children?: ReactNode }) => (
+    <span className="text-sm text-app-secondary-dark dark:text-app-secondary-light py-1">
+      {children}
+    </span>
+  ),
+
+  ul: ({ children }: { children?: ReactNode }) => (
+    <ul className="list-disc my-2 ml-2 text-app-typo-p-dark/80">
+      {children}
+    </ul>
+  ),
+
+  ol: ({ children }: { children?: ReactNode }) => (
+    <ol className="list-decimal my-2 ml-2 text-app-typo-p-dark/80">
+      {children}
+    </ol>
+  ),
+
+  li: ({ children }: { children?: ReactNode }) => (
+    <li className="text-sm md:text-base text-app-typo-p-dark/90">
+      {children}
+    </li>
+  ),
+
+  blockquote: ({ children }: { children?: ReactNode }) => (
+    <blockquote className="border-l-4 border-app-primary-dark dark:border-app-primary-light pl-4 italic text-app-secondary-dark dark:text-app-secondary-light">
+      {children}
+    </blockquote>
+  ),
+
+  img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
+    <img
+      {...props}
+      className={cn("rounded-xl shadow-lg my-4 w-full object-contain", props.className)}
+    />
+  ),
+
   strong: ({ children }: { children?: ReactNode }) => (
-    <strong className="font-semibold text-foreground">
+    <strong className="font-semibold text-app-typo-h2-dark">
       {children}
     </strong>
   ),
+
   em: ({ children }: { children?: ReactNode }) => (
-    <em className="italic text-foreground">
+    <em className="italic text-app-primary-dark">
       {children}
     </em>
   ),
-  // Enhanced custom components
-  Card: ({ title, description, children }: { title?: string; description?: string; children?: ReactNode }) => (
-    <Card className="my-8 shadow-lg border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-xl transition-all duration-300">
-      {(title || description) && (
-        <CardHeader className="pb-4">
-          {title && (
-            <CardTitle className="text-xl font-semibold text-foreground flex items-center gap-2">
-              {title}
-            </CardTitle>
-          )}
-          {description && (
-            <CardDescription className="text-muted-foreground mt-2">
-              {description}
-            </CardDescription>
-          )}
-        </CardHeader>
-      )}
-      <CardContent className="pt-0">
-        <div className="prose prose-neutral dark:prose-invert max-w-none">
-          {children}
-        </div>
-      </CardContent>
-    </Card>
-  ),
-  Alert: ({ type = 'info', children }: { type?: 'info' | 'warning' | 'success'; children?: ReactNode }) => {
-    const configs = {
-      info: {
-        icon: Info,
-        className: "border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/30 text-blue-900 dark:text-blue-100"
-      },
-      warning: {
-        icon: AlertTriangle,
-        className: "border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/30 text-amber-900 dark:text-amber-100"
-      },
-      success: {
-        icon: CheckCircle,
-        className: "border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950/30 text-green-900 dark:text-green-100"
-      }
-    };
-    
-    const config = configs[type];
-    const Icon = config.icon;
-    
-    return (
-      <Alert className={cn("my-6 shadow-sm", config.className)}>
-        <Icon className="h-5 w-5" />
-        <AlertDescription className="ml-2 font-medium">
-          {children}
-        </AlertDescription>
-      </Alert>
-    );
-  },
-  Badge: ({ children, variant }: { children?: ReactNode; variant?: 'default' | 'secondary' | 'destructive' | 'outline' }) => (
-    <Badge variant={variant} className="mx-1 shadow-sm">
-      {children}
-    </Badge>
-  ),
-  Button: ({ children, variant, size }: { children?: ReactNode; variant?: string; size?: string }) => (
-    <Button variant={variant as any} size={size as any} className="my-2 shadow-sm hover:shadow-md transition-shadow">
-      {children}
-    </Button>
-  ),
-};
 
-export { components };
+  table: ({ children }: { children?: ReactNode }) => (
+    <table className="table-auto w-full bg-app-border-dark/30 rounded-md my-2">
+      {children}
+    </table>
+  ),
+
+  thead: ({ children }: { children?: ReactNode }) => (
+    <thead>{children}</thead>
+  ),
+
+  tr: ({ children }: { children?: ReactNode }) => (
+    <tr className="border-app-border-dark">{children}</tr>
+  ),
+
+  td: ({ children }: { children?: ReactNode }) => (
+    <td className="p-3 text-xs md:text-sm text-left text-app-typo-p-dark border-app-border-dark">
+      {children}
+    </td>
+  ),
+
+  th: ({ children }: { children?: ReactNode }) => (
+    <th className="p-3 text-xs md:text-sm text-left font-semibold border-app-border-dark bg-app-border-dark/40">
+      {children}
+    </th>
+  ),
+
+  // code: ({ children }: { children?: ReactNode }) => (
+  //   <code className="bg-app-border-dark text-app-btn-primary/80 px-1.5 py-0.5 rounded-md font-dm-mono text-sm">
+  //     {children}
+  //   </code>
+  // ),
+};
